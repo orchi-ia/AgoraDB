@@ -4,7 +4,7 @@ USE agora;
 -- 2 stored procedures for repeatable procs:
 	-- an existing user wants to purchase Ambrosia (an Agora membership)!
     -- an existing user would like to delete their account...
-    -- DML commands used: INSERT, DELETE.
+    -- DML commands used: UPDATE, DELETE.
 
 -- query(1) to view the users table before the below sprocs are called.
 	-- uses ORDER BY.
@@ -19,9 +19,9 @@ CREATE PROCEDURE new_ambrosia(id INT, payment_id VARCHAR(20), date DATE)
 BEGIN
 	-- add payment and membership details.
 	INSERT INTO members
-    	(user_id, payment_id, membership, member_from)
-    	VALUES
-    	(id, payment_id, 'Ambrosia', date);
+    (user_id, payment_id, membership, member_from)
+    VALUES
+    (id, payment_id, 'Ambrosia', date);
 END//
 DELIMITER ;
 
