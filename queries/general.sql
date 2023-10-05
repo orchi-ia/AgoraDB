@@ -4,7 +4,7 @@ USE agora;
 -- 2 stored procedures for repeatable procs:
 	-- an existing user wants to purchase Ambrosia (an Agora membership)!
     -- an existing user would like to delete their account...
-    -- DML commands used: UPDATE, DELETE.
+    -- DML commands used: INSERT, DELETE.
 
 -- query(1) to view the users table before the below sprocs are called.
 	-- uses ORDER BY.
