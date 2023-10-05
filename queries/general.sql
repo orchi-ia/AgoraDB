@@ -27,10 +27,10 @@ DELIMITER ;
 
 CALL new_ambrosia(9, 'I35TccIVc5oVehY7HnDC', '2023-09-29');
 
-DROP PROCEDURE deleter;
+DROP PROCEDURE user_deleter;
 
 DELIMITER //
-CREATE PROCEDURE deleter(id INT)
+CREATE PROCEDURE user_deleter(id INT)
 BEGIN
 	-- disable foreign key checks as would still like to keep user's posts!
 	SET FOREIGN_KEY_CHECKS = 0;
@@ -48,7 +48,7 @@ BEGIN
 END//
 DELIMITER ;
 
-CALL deleter(12);
+CALL user_deleter(12);
 
 -- query(2) to view updated records after changes from sprocs.
 	-- should only return the record of user id 9
