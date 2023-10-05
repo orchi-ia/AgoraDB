@@ -23,7 +23,9 @@ CREATE TABLE IF NOT EXISTS users(
 
 -- membership information.
 CREATE TABLE IF NOT EXISTS members(
-	user_id INT NOT NULL UNIQUE,
+	-- one-to-one relationship with users:
+	-- ok for foreign key to be primary key.
+	user_id INT UNIQUE PRIMARY KEY,
 		FOREIGN KEY (user_id) REFERENCES users(id),
 	payment_id VARCHAR(20),
     membership CHAR(8),
@@ -32,14 +34,14 @@ CREATE TABLE IF NOT EXISTS members(
     
 -- categories of posts.
 CREATE TABLE IF NOT EXISTS class(
-	id INT UNIQUE,
-	category VARCHAR(20) PRIMARY KEY,
+	id INT UNIQUE PRIMARY KEY AUTO_INCREMENT,
+	category VARCHAR(20),
 	posts INT
 );
 
 -- track all posts.
 CREATE TABLE IF NOT EXISTS posts(
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT UNIQUE PRIMARY KEY,
     class_id INT,
 		FOREIGN KEY (class_id) REFERENCES class(id),
     title VARCHAR(80) NOT NULL,
@@ -53,7 +55,7 @@ CREATE TABLE IF NOT EXISTS posts(
 
 -- statuses that users obtain depending on activity.
 CREATE TABLE IF NOT EXISTS status(
-	id INT UNIQUE,
+	id INT UNIQUE PRIMARY KEY AUTO_INCREMENT,
 	typ VARCHAR(20) DEFAULT 'Hero',
     lvl INT
 );
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS status(
 -- table insertions.
 
 INSERT INTO users
-(id, region, ctry_code, username, passcode, email, creation)
+(region, ctry_code, username, passcode, email, creation)
 VALUES
 ('Northern Europe', 'GBR', 'asyndev', 'p@ZZ-Wr97', 'agora_dev1@gmail.com', '2020-06-30'),
 ('Sub-Saharan Africa', 'NGA', 'cognisnt', 'quwRT9_ps8', 'lgsgrl@gmail.com', '2020-07-22'),
@@ -82,30 +84,23 @@ INSERT INTO members
 VALUES
 (1, 'ewMVQulP0PsJ5tXH7Mk4', 'Ambrosia', '2022-02-28'),
 (2, 'EpqcU4H8WrYFwtL0GkoT', 'Ambrosia', '2022-02-28'),
-(3, NULL, NULL, NULL),
-(4, NULL, NULL, NULL),
 (5, 'f6GF6upXUGoZh2wIZoCM', 'Ambrosia', '2022-06-01'),
-(6, NULL, NULL, NULL),
-(7, NULL, NULL, NULL),
-(8, NULL, NULL, NULL),
-(9, NULL, NULL, NULL),
 (10, 'jHycIRJqfni3O9FF8LOO', 'Ambrosia', '2023-01-25'),
 (11, 'rOrTVo1MlUl43HgxLXY0', 'Ambrosia', '2023-07-24'),
-(12, NULL, NULL, NULL),
 (13, 'UPQgxTXGO0QBmOXBSDwv', 'Ambrosia', '2023-09-01');
 
 INSERT INTO class
-(id, category, posts)
+(category, posts)
 VALUES
-(1, 'Beta', 53),
-(2, 'General', 458),
-(3, 'News', 372),
-(4, 'Gaming', 493),
-(5, 'Anime', 368),
-(6, 'Books', 291),
-(7, 'Plants', 174),
-(8, 'Food', 293),
-(9, 'Bugs', 138);
+('Beta', 53),
+('General', 458),
+('News', 372),
+('Gaming', 493),
+('Anime', 368),
+('Books', 291),
+('Plants', 174),
+('Food', 293),
+('Bugs', 138);
 
 -- all posts from 01/06 to 30/09 (3 months).
 INSERT INTO posts
@@ -164,13 +159,13 @@ VALUES
 
 -- scaled down status levels.
 INSERT INTO status
-(id, typ, lvl)
+(typ, lvl)
 VALUES
-(0, 'Hero', 0),
-(1, 'Nymph', 4), -- actual level: 700
-(2, 'Olympian', 7), -- actual level: 1600
-(3, 'Titan', 12), -- actual level: 2900
-(4, 'Primordial', 19); -- actual level: 5000
+('Hero', 0),
+('Nymph', 4), -- actual level: 700
+('Olympian', 7), -- actual level: 1600
+('Titan', 12), -- actual level: 2900
+('Primordial', 19); -- actual level: 5000
 
 
     

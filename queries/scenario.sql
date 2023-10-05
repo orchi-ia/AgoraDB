@@ -12,14 +12,16 @@ USE agora;
 	-- uses inbuilt function (ISNULL) and second aggregate function (SUM).
 SELECT
 	SUM(CASE WHEN ISNULL(m.membership) THEN 1 ELSE 0 END)
-	/ SUM(CASE WHEN m.user_id THEN 1 ELSE 0 END) * 100
+	/ SUM(CASE WHEN u.id THEN 1 ELSE 0 END) * 100
 AS '% users without ambrosia'
-FROM members m;
+FROM users u
+LEFT JOIN members m
+ON u.id = m.user_id;
 
 -- result: less than 50% of users in the dataset do not have a membership.
 
 
--- query(6): ccompare the num of Ambrosia memberships since the update vs
+-- query(6): compare the num of Ambrosia memberships since the update vs
 -- using the same time period before the update as a ratio.
 	-- uses second and third inbuilt functions (DATE_ADD and DATEDIFF).
     -- uses aggregate function (COUNT).
@@ -39,6 +41,7 @@ SELECT
         THEN 1
         ELSE 0
         END)
+AS 'ratio'
 FROM members m;
 
 -- result: tripled memberships bought since the update compared to the months before.

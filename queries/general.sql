@@ -17,10 +17,11 @@ DROP PROCEDURE new_ambrosia;
 DELIMITER //
 CREATE PROCEDURE new_ambrosia(id INT, payment_id VARCHAR(20), date DATE)
 BEGIN
-	-- update the payment and membership details.
-	UPDATE members m
-	SET m.payment_id = payment_id, m.membership = 'Ambrosia', m.member_from = date
-	WHERE m.user_id = id;
+	-- add payment and membership details.
+	INSERT INTO members
+    (user_id, payment_id, membership, member_from)
+    VALUES
+    (id, payment_id, 'Ambrosia', date);
 END//
 DELIMITER ;
 
@@ -59,11 +60,11 @@ FROM members m
 WHERE m.user_id = 9 OR m.user_id = 12
 ORDER BY m.user_id;
 
+
 -- view the users table again to ensure user id 12 has been deleted.
 SELECT *
 FROM users u
 ORDER BY u.id;
-
 
 
 
@@ -97,7 +98,7 @@ SELECT u.id, u.username, v.status, m.membership
 FROM vw_user_activity v
 INNER JOIN users u
 ON u.username = v.user
-INNER JOIN members m
+LEFT JOIN members m
 ON m.user_id = u.id
 ORDER BY u.id;
 
