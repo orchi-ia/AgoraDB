@@ -158,6 +158,7 @@ VALUES
 (10896, 3, 'What is happening in your country?', 9, '2023-01-03 20:52:16', 340, 11, 1);
 
 -- scaled down status levels.
+  -- levels are the number of posts.
 INSERT INTO status
 (typ, lvl)
 VALUES

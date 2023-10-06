@@ -1,13 +1,6 @@
 # AGORA
 
-Greek:
-Αγορά (aɣɔˈɾa)
-
-*[n]  feminine.*
-
-* meaning: market, marketplace.
-
-Agora is a website and app that brings users together to chat both privately and publicly through a web of categorised communities based on interests and hobbies.
+A website and app that brings users together to chat both privately and publicly through a web of categorised communities based on interests and hobbies.
 
 * Note: this project uses the MySQL server with
 	* workbench version: 8.0.31.CE and
@@ -27,7 +20,7 @@ Some of the everyday queries we use in the running of our website and app.
 Includes:
 * A user deleting their account.
 * A user purchasing Ambrosia (our membership).
-* Viewing user statuses.
+* Viewing user statuses (ranks users can obtain depending on posting activity).
 
 ## Scenario
 

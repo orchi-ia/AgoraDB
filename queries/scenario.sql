@@ -76,7 +76,7 @@ ON u.id = p.user_id
 ORDER BY p.grumble DESC
 LIMIT 15;
 
--- filter by most cheers and most grumbles.
+-- filter by most controversial.
 SELECT u.username, p.title, p.cheer, p.grumble
 FROM posts p
 JOIN users u
@@ -84,7 +84,7 @@ ON u.id = p.user_id
 ORDER BY p.cheer DESC, p.grumble DESC
 LIMIT 15;
 
--- demonstrating an example filter for a single category using a nested SELECT.
+-- demonstrating an example filter on a single category using a nested SELECT.
 SELECT u.username, p.title, p.posted
 FROM posts p
 JOIN users u
