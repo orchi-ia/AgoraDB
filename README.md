@@ -6,6 +6,10 @@ A website and app that brings users together to chat both privately and publicly
 	* workbench version: 8.0.31.CE and
 	* server version: 8.1.0.
 
+## Functionality
+
+Please run `agora.sql` first, `general.sql` second and `scenario.sql` last to experience the full database journey.
+
 ## Agora
 
 The setup of our database.
