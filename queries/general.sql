@@ -51,13 +51,11 @@ DELIMITER ;
 CALL user_deleter(12);
 
 -- query(2) to view updated records after changes from sprocs.
-	-- should only return the record of user id 9
-    -- and reflect their new payment ID and membership.
-    -- user id 12 is no longer in the DB.
+	-- should reflect the new payment id and membership of user id 9.
     -- uses ORDER BY.
 SELECT *
 FROM members m
-WHERE m.user_id = 9 OR m.user_id = 12
+WHERE m.user_id = 9
 ORDER BY m.user_id;
 
 
