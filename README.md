@@ -10,6 +10,8 @@ A website and app that brings users together to chat both privately and publicly
 
 Please run `agora.sql` first, `general.sql` second and `scenario.sql` last to experience the full database journey.
 
+The contents of each file is explained in their corresponding sections below.
+
 ## Agora
 
 The setup of our database.
