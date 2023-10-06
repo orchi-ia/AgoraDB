@@ -98,7 +98,7 @@ LIMIT 15;
 
 
 -- GOAL 3:
--- queries(8) to track user engagement in post categories.
+-- queries(8) to track popularity (most/least) of post categories.
 	-- uses third and fourth aggregate functions (MAX and MIN) and ORDER BY.
 SELECT c.category, p.title, p.posted, u.username
 FROM posts p

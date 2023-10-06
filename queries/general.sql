@@ -12,7 +12,7 @@ SELECT *
 FROM users u
 ORDER BY u.id;
 
-DROP PROCEDURE new_ambrosia;
+DROP PROCEDURE IF EXISTS new_ambrosia;
 
 DELIMITER //
 CREATE PROCEDURE new_ambrosia(id INT, payment_id VARCHAR(20), date DATE)
@@ -27,7 +27,7 @@ DELIMITER ;
 
 CALL new_ambrosia(9, 'I35TccIVc5oVehY7HnDC', '2023-09-29');
 
-DROP PROCEDURE user_deleter;
+DROP PROCEDURE IF EXISTS user_deleter;
 
 DELIMITER //
 CREATE PROCEDURE user_deleter(id INT)
@@ -89,7 +89,7 @@ ON u.id = p.user_id
 GROUP BY u.id
 ORDER BY u.id;
 
--- query(3) to see the view.
+-- query(3) to use the view.
 	-- uses ORDER BY and second join (INNER JOIN) to return
     -- only matching users.
 SELECT u.id, u.username, v.status, m.membership
