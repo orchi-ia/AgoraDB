@@ -1,15 +1,8 @@
 
 USE agora;
 
--- Scenario: End of year review!
-
--- Please view the README for an overview of our end of year goals (including the results from the below)!
-
-
-
 -- GOAL 1:
--- query(5): the % of users who do not have Ambrosia.
-	-- uses inbuilt function (ISNULL) and second aggregate function (SUM).
+-- the % of users who do not have Ambrosia.
 SELECT
 	SUM(CASE WHEN ISNULL(m.membership) THEN 1 ELSE 0 END)
 	/ SUM(CASE WHEN u.id THEN 1 ELSE 0 END) * 100
@@ -21,10 +14,8 @@ ON u.id = m.user_id;
 -- result: less than 50% of users in the dataset do not have a membership.
 
 
--- query(6): compare the num of Ambrosia memberships since the update vs
--- using the same time period before the update as a ratio.
-	-- uses second and third inbuilt functions (DATE_ADD and DATEDIFF).
-    -- uses aggregate function (COUNT).
+-- compare the num of Ambrosia memberships since the update vs
+-- the same time period before the update as a ratio.
 SELECT
 	SUM(CASE WHEN m.member_from > '2023-05-29'
 		THEN 1
@@ -49,8 +40,7 @@ FROM members m;
 
 
 -- GOAL 2:
--- queries(7) to filter posts assuming all posts in the table are under one category.
-	-- uses third join (EQUI JOIN) and ORDER BY.
+-- assuming all posts in the table are under one category.
     
 -- filter by post date.
 SELECT u.username, p.title, p.posted
@@ -98,8 +88,7 @@ LIMIT 15;
 
 
 -- GOAL 3:
--- queries(8) to track popularity (most/least) of post categories.
-	-- uses third and fourth aggregate functions (MAX and MIN) and ORDER BY.
+-- track popularity (most/least) of post categories.
 SELECT c.category, p.title, p.posted, u.username
 FROM posts p
 JOIN class c
@@ -128,22 +117,22 @@ ORDER BY p.posted DESC;
 -- result: Gaming is the most popular category and Beta is the least popular.
 
 
-    
+
 -- GOAL 4:
--- query(9) to see how many central american users we have.
+-- the num of central american users.
 SELECT
 	SUM(CASE WHEN u.region = 'Central America' THEN 1 ELSE 0 END) /
     SUM(CASE WHEN u.id THEN 1 ELSE 0 END) * 100
     AS '% central american users'
 FROM users u;
 
--- queries(10) to consider how much central american users have posted.
+-- consider how much central american users have posted.
 SELECT (SELECT COUNT(*)
 		FROM posts p
 		WHERE p.user_id IN (SELECT u.id
 							FROM users u
 							WHERE u.region = 'Central America')) /
--- relative to all posts.
+-- relative to posts by users in other regions.
 	(SELECT COUNT(*)
 	FROM posts) * 100 AS 'ratio of central american user posts to all posts';
 

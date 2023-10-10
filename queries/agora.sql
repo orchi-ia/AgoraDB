@@ -4,12 +4,6 @@ DROP DATABASE IF EXISTS agora;
 CREATE DATABASE IF NOT EXISTS agora;
 USE agora;
 
--- at least 3 datatypes: INT, CHAR, VARCHAR, DATE, TIMESTAMP.
--- at least 2 constraints: NOT NULL, UNIQUE, DEFAULT.
--- DML commands: INSERT (for each table, total of 4 queries).
--- PRIMARY KEYS in all tables except 'status'.
--- FOREIGN KEY in 'posts' table.
-
 -- user information.
 CREATE TABLE IF NOT EXISTS users(
 	id INT UNIQUE PRIMARY KEY AUTO_INCREMENT,
@@ -102,7 +96,7 @@ VALUES
 ('Food', 293),
 ('Bugs', 138);
 
--- all posts from 01/06 to 30/09 (3 months).
+-- all posts from 01/01 to 30/09 (9 months).
 INSERT INTO posts
 (id, class_id, title, user_id, posted, comments, cheer, grumble)
 VALUES

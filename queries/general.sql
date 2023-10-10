@@ -1,13 +1,6 @@
 
 USE agora;
 
--- 2 stored procedures for repeatable procs:
-	-- an existing user wants to purchase Ambrosia (an Agora membership)!
-    -- an existing user would like to delete their account...
-    -- DML commands used: INSERT, DELETE.
-
--- query(1) to view the users table before the below sprocs are called.
-	-- uses ORDER BY.
 SELECT *
 FROM users u
 ORDER BY u.id;
@@ -50,14 +43,12 @@ DELIMITER ;
 
 CALL user_deleter(12);
 
--- query(2) to view updated records after changes from sprocs.
-	-- should reflect the new payment id and membership of user id 9.
-    -- uses ORDER BY.
+
+-- view updated membership for user id 9.
 SELECT *
 FROM members m
 WHERE m.user_id = 9
 ORDER BY m.user_id;
-
 
 -- view the users table again to ensure user id 12 has been deleted.
 SELECT *
@@ -65,10 +56,7 @@ FROM users u
 ORDER BY u.id;
 
 
-
 -- view the statuses of each user!
-	-- creates a view, followed by a query(3) to set and retrieve user statuses.
-    -- uses ORDER BY, LEFT JOIN, aggregate function (COUNT).
 CREATE OR REPLACE VIEW vw_user_activity
 AS
 -- initialise the username column.
@@ -89,9 +77,7 @@ ON u.id = p.user_id
 GROUP BY u.id
 ORDER BY u.id;
 
--- query(3) to use the view.
-	-- uses ORDER BY and second join (INNER JOIN) to return
-    -- only matching users.
+-- see the view.
 SELECT u.id, u.username, v.status, m.membership
 FROM vw_user_activity v
 INNER JOIN users u
@@ -102,14 +88,12 @@ ORDER BY u.id;
 
 
 -- user id 8 would like to delete their most recent post as it seems to be quite controversial.
-	-- uses ORDER BY.
 DELETE FROM posts p
 WHERE user_id = 8
 ORDER BY p.posted DESC
 LIMIT 1;
 
--- query(4) to view updated posts from user id 8.
-	-- uses ORDER BY.
+-- view updated posts from user id 8.
 SELECT *
 FROM posts p
 WHERE user_id = 8
